@@ -40,10 +40,20 @@ WHERE district LIKE 'K%'
 Для просмотра платежей, нужно выполнить такой запрос. 
 
 ```sql
-SELECT *
-FROM payment
-WHERE payment_date BETWEEN '2005-06-15' AND '2005-06-18'
-  AND amount > 10.00;
+SELECT 
+    payment_id,
+    customer_id,
+    rental_id,
+    amount,
+    payment_date,
+    DATE(payment_date) AS payment_day
+FROM 
+    payment
+WHERE 
+    DATE(payment_date) BETWEEN '2005-06-15' AND '2005-06-18'
+    AND amount > 10.00
+ORDER BY 
+    payment_date;
 
 ```
 В ответ получим такую таблицу с данными.
